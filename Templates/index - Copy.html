@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry Form</title>
+    <!-- Include D3.js library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <h1>Data Entry Form</h1>
+    <form id="data-entry-form" action="/predict" method="POST">
+        <!-- Gender Dropdown created with D3.js -->
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+        </select><br><br>
+
+        <!-- Age Dropdown created with D3.js -->
+        <label for="age">Age:</label>
+        <select id="age" name="age">
+        </select><br><br>
+
+        <!-- Hypertension Dropdown created with D3.js -->
+        <label for="hypertension">Hypertension:</label>
+        <select id="hypertension" name="hypertension">
+        </select><br><br>
+
+        <!-- heart_disease Dropdown created with D3.js -->
+        <label for="heart_disease">Heart Disease:</label>
+        <select id="heart_disease" name="heart_disease">
+        </select><br><br>
+
+         <!-- ever_married Dropdown created with D3.js -->
+         <label for="ever_married">Has the patient ever been married:</label>
+         <select id="ever_married" name="ever_married">
+         </select><br><br>       
+
+         <!-- work_type Dropdown created with D3.js -->
+         <label for="work_type">What type of work does the patient do:</label>
+         <select id="work_type" name="work_type">
+         </select><br><br>             
+
+         <!-- Residence_type Dropdown created with D3.js -->
+         <label for="Residence_type">Does the patient live urban or rural?:</label>
+         <select id="Residence_type" name="Residence_type">
+         </select><br><br>      
+
+        <!-- Average Glucose Level -->
+        <label for="avg_glucose_level">Average Glucose Level:</label>
+        <input type="number" id="avg_glucose_level" name="avg_glucose_level"><br><br>
+
+         <!-- smoking_status Dropdown created with D3.js -->
+         <label for="smoking_status">Does the patient smoke?:</label>
+         <select id="smoking_status" name="smoking_status">
+         </select><br><br>   
+
+        <!-- Submit Button -->
+        <input type="button" value="Submit" onclick="submitForm()">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        // Generate the "Gender" dropdown options with D3.js
+        const genderOptions = ['Male', 'Female', 'Other'];
+
+        d3.select('#gender')
+            .selectAll('option')
+            .data(genderOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);
+
+        // Generate the "Age" dropdown options with D3.js
+        const ageOptions = Array.from({ length: 100 }, (_, i) => i + 1);
+
+        d3.select('#age')
+            .selectAll('option')
+            .data(ageOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);
+
+        // Generate the "Hypertension" dropdown options with D3.js
+        const hypertensionOptions = ['No', 'Yes'];
+
+        d3.select('#hypertension')
+            .selectAll('option')
+            .data(hypertensionOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);
+
+        // Generate the "heart_disease" dropdown options with D3.js
+        const heart_diseaseOptions = ['No', 'Yes'];
+
+        d3.select('#heart_disease')
+            .selectAll('option')
+            .data(heart_diseaseOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);
+        
+        // Generate the "ever_married" dropdown options with D3.js
+        const ever_marriedOptions = ['No', 'Yes'];
+
+        d3.select('#ever_married')
+            .selectAll('option')
+            .data(ever_marriedOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);
+
+        // Generate the "work_type" dropdown options with D3.js
+        const work_typeOptions = ['Private', 'Self-employed', 'children', 'govt_job', 'Never_worked'];
+
+        d3.select('#work_type')
+            .selectAll('option')
+            .data(work_typeOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);            
+
+        // Generate the "Residence_type" dropdown options with D3.js
+        const Residence_typeOptions = ['Urban', 'Rural'];
+
+        d3.select('#Residence_type')
+            .selectAll('option')
+            .data(Residence_typeOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);            
+            
+        // Generate the "smnoking_status" dropdown options with D3.js
+        const smoking_statusOptions = ['Smokes currently', 'Formerly smoked', 'Never smoked', 'Unknown'];
+
+        d3.select('#smoking_status')
+            .selectAll('option')
+            .data(smoking_statusOptions)
+            .enter()
+            .append('option')
+            .text(d => d)
+            .attr('value', d => d);    
+
+        function submitForm() {
+            // Collect user input data
+            const data = {
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value,
+                hypertension: document.getElementById('hypertension').value,
+                heart_disease: document.getElementById('heart_disease').value,
+                ever_married: document.getElementById('ever_married').value,
+                work_type: document.getElementById('work_type').value,
+                residence_type: document.getElementById('Residence_type').value,
+                avg_glucose_level: document.getElementById('avg_glucose_level').value,
+                smoking_status: document.getElementById('smoking_status').value
+            };
+            console.log(data);
+
+            // Send the data to the API 
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                // Display the prediction
+                const prediction = result.prediction.prediction;
+                console.log(prediction)
+                document.getElementById('result').innerHTML = `Predicted Outcome: ${prediction}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    </script>
+</body>
+</html>
