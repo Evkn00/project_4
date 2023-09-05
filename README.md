@@ -33,7 +33,7 @@ BMI is the only feature in the dataset with any missing values. A large number (
 ![image](https://github.com/Evkn00/project_4/assets/69624124/dece073c-7ece-49ec-94c7-661eab097da9)
 
 ### Skewed data set.
-Only 202 of over 5000 of the observations had a positive target variable. However this did not seem to effect the model's ability to accurately predict after a reasonble amount of testing. However this is something that likely could benefit from something like SMOTE (Synthetic Minority Oversampling Technique) at a later date.
+Only 202 of over 5000 of the observations had a positive target variable. However this did not seem to effect the model's ability to accurately predict after a reasonble amount of testing. However this is something that likely could benefit from something like SMOTE (Synthetic Minority Oversampling Technique) at a later date. Stratified sampling during the train test split did not change the performance of the model. 
 
 ### Outliers
 BMI will be ignored as it is not included in the data set, which only leaves avg_glucose_level showing any possible outliers, however looking at a scatter most of the positive target variables have an avg_glucose_level that would put them outside of the 3rd quartile, which shows that the correlation of avg_glucose_level to stroke = 1 is very strong. No outliers will be removed.
