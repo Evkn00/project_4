@@ -74,9 +74,9 @@ This model was selected for use in the Webapp as it was slightly more accurate.
 
 ## 6. The Webapp
 The web app was created using a python flask API accepting inputs from a HTML page and then runing the model predictions based on the submitted data and then returning a value to the Webapp. Risk levels were assigned based on the Sigmoid number returned by the model:
-  ####High Risk: >0.4
-  ####Medium Risk: >0.3
-  ####Low Risk: <0.3
+  #### High Risk: >0.4
+  #### Medium Risk: >0.3
+  #### Low Risk: <0.3
 
 
 
