@@ -78,6 +78,16 @@ The web app was created using a python flask API accepting inputs from a HTML pa
   #### Medium Risk: >0.3
   #### Low Risk: <0.3
 
+## 7. Files
+
+app.py - flask API for serving the ML model. 
+stroke_data_EDA.ipynb - EDA of dataset
+storke_data_decision_Tree.ipynb - Decision tree modeling
+stroke_data_nn.ipynb - Neural Network modeling
+templates/index.html - main webapp html file
+models/stroke_data_nn_model.h5 - Neural network model for flask API. 
+resources/healthcare-dataset-stroke-data.csv - dataset for project
+
 
 
 
