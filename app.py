@@ -37,7 +37,7 @@ def index():
             gender_Male = 0
             gender_Other= 0
 
-
+            #Logic to build array for ML
             if hypertension == "Yes":
                 hypertension = 1
             else: 
@@ -51,7 +51,6 @@ def index():
 
             if gender == 'Female':
                 gender_Female = 1
-
             elif gender == 'Male':
                 gender_Male = 1           
             else:
